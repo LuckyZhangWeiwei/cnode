@@ -42,8 +42,8 @@ export default class SideRight extends Component {
                 </div>
                 <ul className="nav">
                     <li><NavLink to={`/user/${loginname}`}><Icon type="meh-o" />个人中心</NavLink></li>
-                    <li><NavLink to="/not-dev"><Icon type="bell" /><Badge count={this.state.unReadCount} style={{ left: 70,backgroundColor: '#52c41a' }}><span>消息提醒</span></Badge></NavLink> </li>
-                    <li><NavLink to="/not-dev"><Icon type="heart-o" />我的收藏</NavLink></li>
+                    <li><NavLink to={`/message`}><Icon type="bell" /><Badge count={this.state.unReadCount} style={{ left: 70, backgroundColor: '#52c41a' }}><span>消息提醒</span></Badge></NavLink> </li>
+                    <li><NavLink to={`/user/collection/${loginname}`}><Icon type="heart-o" />我的收藏</NavLink></li>
                 </ul>
             </div>
             );
