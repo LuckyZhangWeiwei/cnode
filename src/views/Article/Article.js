@@ -140,7 +140,7 @@ export default class Article extends Component {
             <Icon type="star-o" onClick={this.collectTopic.bind(this, true)}></Icon>;
         return (
             showLoading ?
-                <Spin style={{ marginTop: "80%", marginLeft: "50%" }} type="loading" spin/>
+                <Spin style={{ marginTop: "80%", marginLeft: "50%" }} type="loading" spin="true"/>
                 :
                 <div className="article">
                     <div className="article-b">
