@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import './article.scss';
 import axios from 'axios';
-import { Row, Col, Icon } from 'antd';
+import { Row, Col, Icon ,Spin} from 'antd';
 import { getDurTime, getCookie } from './../../assets/js/utils';
 import ReplyList from './../../components/ReplyList/ReplyList';
 import PostBox from './../../components/common/PostBox/PostBox';
@@ -25,7 +25,8 @@ export default class Article extends Component {
             is_collect: false,
             topicId: null,
             isShowDialog: false,
-            atAuthor: null
+            atAuthor: null,
+            showLoading: true
         }
     }
     componentDidMount() {
@@ -45,7 +46,8 @@ export default class Article extends Component {
                 last_reply_at,
                 replies: [...replies],
                 is_collect,
-                topicId: id
+                topicId: id,
+                showLoading: false
             })
         })
     }
@@ -131,52 +133,55 @@ export default class Article extends Component {
             })
     }
     render() {
-        const { avatar_url, loginname, create_at, visit_count, title, content, reply_count, last_reply_at, replies, is_collect } = this.state;
+        const { avatar_url, loginname, create_at, visit_count, title, content, reply_count, last_reply_at, replies, is_collect, showLoading } = this.state;
         const collect_Icon = is_collect === true ?
             <Icon type="star" onClick={this.collectTopic.bind(this, false)}></Icon>
             :
             <Icon type="star-o" onClick={this.collectTopic.bind(this, true)}></Icon>;
         return (
-            <div className="article">
-                <div className="article-b">
-                    <Icon type="arrow-left" className="btn-left" onClick={this.handleGoBack.bind(this)} />
-                    <h4 className="title">帖子详情</h4>
-                    <div className="arrow-right">
-                        <Icon type="form" onClick={this.showReplyDialog.bind(this, null)}></Icon>
-                        {collect_Icon}
+            showLoading ?
+                <Spin style={{ marginTop: "80%", marginLeft: "50%" }} type="loading" spin/>
+                :
+                <div className="article">
+                    <div className="article-b">
+                        <Icon type="arrow-left" className="btn-left" onClick={this.handleGoBack.bind(this)} />
+                        <h4 className="title">帖子详情</h4>
+                        <div className="arrow-right">
+                            <Icon type="form" onClick={this.showReplyDialog.bind(this, null)}></Icon>
+                            {collect_Icon}
+                        </div>
                     </div>
-                </div>
-                <div className="top">
-                    <Row>
-                        <Col span={4}>
-                            <img src={avatar_url}/>
-                        </Col>
-                        <Col span={20}>
-                            <p className="user-name">{loginname}</p>
-                            <p className="info">at {getDurTime(create_at)},{visit_count} 次点击</p>
-                        </Col>
-                    </Row>
-                </div>
-                <div className="content">
-                    <div className="title">
-                        {title}
+                    <div className="top">
+                        <Row>
+                            <Col span={4}>
+                                <img src={avatar_url} />
+                            </Col>
+                            <Col span={20}>
+                                <p className="user-name">{loginname}</p>
+                                <p className="info">at {getDurTime(create_at)},{visit_count} 次点击</p>
+                            </Col>
+                        </Row>
                     </div>
-                    <div dangerouslySetInnerHTML={{ __html: `${content}` }} className="article-text"></div>
-                    <p className="reply-count">{reply_count} 回复 | 直到 {last_reply_at}</p>
+                    <div className="content">
+                        <div className="title">
+                            {title}
+                        </div>
+                        <div dangerouslySetInnerHTML={{ __html: `${content}` }} className="article-text"></div>
+                        <p className="reply-count">{reply_count} 回复 | 直到 {last_reply_at}</p>
+                    </div>
+                    <div className="reply">
+                        <ReplyList data={replies}
+                            onShowReplyDialog={this.showReplyDialog.bind(this)}
+                            onLikeReply={this.likeReply.bind(this)}
+                        />
+                    </div>
+                    <PostBox
+                        onCloseModel={this.closeModel.bind(this)}
+                        onNewPost={this.newReply.bind(this)}
+                        IsShow={this.state.isShowDialog}
+                        atAuthor={this.state.atAuthor}
+                        Type="Reply" />
                 </div>
-                <div className="reply">
-                    <ReplyList data={replies}
-                        onShowReplyDialog={this.showReplyDialog.bind(this)}
-                        onLikeReply={this.likeReply.bind(this)}
-                    />
-                </div>
-                <PostBox
-                    onCloseModel={this.closeModel.bind(this)}
-                    onNewPost={this.newReply.bind(this)}
-                    IsShow={this.state.isShowDialog}
-                    atAuthor={this.state.atAuthor}
-                    Type="Reply"/> 
-            </div>
             );
     }
 

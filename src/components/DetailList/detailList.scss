@@ -3,7 +3,6 @@
 .list-container {
     .row-wrap {
         .list {
-            padding: 5px 10px;
             width: 100%;
             border-bottom: 1px solid $border-color;
             display: flex;
@@ -12,6 +11,8 @@
             background: #fff;
 
             .list-left {
+                width: 20%;
+
                 img {
                     display: block;
                     width: 40px;
@@ -22,9 +23,9 @@
             }
 
             .list-right {
+                width: 80%;
                 font-size: 12px;
                 color: $normal-text-color;
-
                 p {
                     margin-bottom: 0;
                 }
@@ -39,7 +40,7 @@
             }
         }
 
-        &:last-child {     //.row-wrap:last-child .list
+        &:last-child { //.row-wrap:last-child .list
             .list {
                 border-bottom: none;
             }
