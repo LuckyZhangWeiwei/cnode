@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Icon } from 'antd';
 import axios from 'axios';
-import DetailList from './../../components/DetailList/DetailList';
+import MessageList from './../../components/MessageList/MessageList';
 import { getCookie } from './../../assets/js/utils';
 import "./usermessage.scss";
 
@@ -32,8 +32,20 @@ export default class UserMessage extends Component {
     goBack() {
         window.history.back();
     }
+    seeReply(messageId,replyId) {
+        const [avatar_url, id, loginname, usertoken] = getCookie('cnodeuser').split('|');
+        let url = `/article/${messageId}`;
+        axios.post(`message/mark_one/${replyId}`, {
+            accesstoken: usertoken
+        }).then(res => {
+            if (res.success) {
+                this.props.history.push(url);
+             }
+        }).catch(err => {
+            alert(err);
+        })
+    }
     render() {
-        console.log(this.state);
         return (
             <div className="message-container">
                 <div className="banner" onClick={this.goBack}>
@@ -43,7 +55,9 @@ export default class UserMessage extends Component {
                     <span className="title">消息列表</span>
                 </div>
                 <div className="datalist-container">
-                    <DetailList data={this.state.all_list} />
+                    <MessageList data={this.state.all_list}
+                        onSeeReply={this.seeReply.bind(this)}
+                    />
                 </div>
             </div>
         )
