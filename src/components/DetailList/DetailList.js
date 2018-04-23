@@ -38,7 +38,7 @@ export default class DetailList extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="list-container">
                 {this.renderList()}
             </div>
             )

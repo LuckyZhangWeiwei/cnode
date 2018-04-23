@@ -1,40 +1,48 @@
 ﻿@import '../../assets/css/config';
-.row-wrap{
-    &:last-child{
-        .list{
-            margin-bottom:0;
+
+.list-container {
+    .row-wrap {
+        .list {
+            padding: 5px 10px;
+            width: 100%;
+            border-bottom: 1px solid $border-color;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background: #fff;
+
+            .list-left {
+                img {
+                    display: block;
+                    width: 40px;
+                    height: auto;
+                    border-radius: 4px;
+                    margin: auto;
+                }
+            }
+
+            .list-right {
+                font-size: 12px;
+                color: $normal-text-color;
+
+                p {
+                    margin-bottom: 0;
+                }
+
+                .list-till {
+                    font-size: 14px;
+                    color: $emphase-text-color;
+                    line-height: 1.5;
+                    max-height: 42px;
+                    overflow: hidden;
+                }
+            }
         }
-    }
-}
-.list{
-    padding:5px 10px;
-    width:100%;
-    border-bottom:1px solid $border-color;
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    background:#fff;
-    .list-left{
-        img{
-            display:block;
-            width:40px;
-            height:auto;
-            border-radius:4px;
-            margin:auto;
-        }
-    }
-    .list-right{
-        font-size:12px;
-        color:$normal-text-color;
-        p{
-            margin-bottom:0;
-        }
-        .list-till{
-            font-size:14px;
-            color:$emphase-text-color;
-            line-height:1.5;
-            max-height:42px;
-            overflow:hidden;
+
+        &:last-child {     //.row-wrap:last-child .list
+            .list {
+                border-bottom: none;
+            }
         }
     }
 }
