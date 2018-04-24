@@ -13,12 +13,16 @@ export default class PostBox extends Component {
     }
     componentWillReceiveProps(nextprops) {
        if (nextprops.IsShow) {
+        let content= ReactDOM.findDOMNode(this.refs.replyContent);
+        if(content){
             let author= nextprops.atAuthor===null?null:"@"+ nextprops.atAuthor+" ";
-            ReactDOM.findDOMNode(this.refs.replyContent).value=author;
+            ReactDOM.findDOMNode(content).value=author;
+        }
        }
     }
     componentWillUnmount(){
-        ReactDOM.findDOMNode(this.refs.replyContent).value=null;
+        let content= ReactDOM.findDOMNode(this.refs.replyContent);
+        if(content)ReactDOM.findDOMNode(content).value=null;
     }
     handleChange(key, val) {
         this.setState({
