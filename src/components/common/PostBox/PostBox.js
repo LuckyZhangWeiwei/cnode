@@ -8,7 +8,8 @@ export default class PostBox extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            atAuthor: null
+            atAuthor: null,
+            isFirstTime:true
         }
     }
     componentWillReceiveProps(nextprops) {
@@ -19,6 +20,9 @@ export default class PostBox extends Component {
             ReactDOM.findDOMNode(content).value=author;
         }
        }
+       this.setState({
+        isFirstTime:false
+       })
     }
     componentWillUnmount(){
         let content= ReactDOM.findDOMNode(this.refs.replyContent);
@@ -30,7 +34,9 @@ export default class PostBox extends Component {
         })
     }
     renderContent(isShow) {
-        let contentClass = isShow ? "content-box  content-up" : "content-box  content-down";
+        let contentClass = this.state.isFirstTime?"content-box":
+        isShow ? "content-box  content-up" : "content-box  content-down";
+        
         if (this.props.Type === "Topic") {
             return <div className={contentClass}>
                 <Input placeholder="请输入标题" onChange={v => this.handleChange('title', v)} />
