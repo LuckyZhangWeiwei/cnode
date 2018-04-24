@@ -54,11 +54,11 @@ export default class UserMessage extends Component {
                     </span>
                     <span className="title">消息列表</span>
                 </div>
-                <div className="datalist-container">
+                <section className="datalist-container">
                     <MessageList data={this.state.all_list}
                         onSeeReply={this.seeReply.bind(this)}
                     />
-                </div>
+                </section>
             </div>
         )
     }

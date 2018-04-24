@@ -36,9 +36,9 @@ export default class Collections extends Component {
                     </span>
                     <span className="title">收藏主题</span>
                 </div>
-                <div className="datalist-container">
+                <section className="datalist-container">
                     <DetailList data={this.state.collection} />
-                </div>
+                </section>
             </div>
             )
     }

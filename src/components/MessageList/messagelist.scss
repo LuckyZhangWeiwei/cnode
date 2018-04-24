@@ -1,7 +1,8 @@
 ﻿@import '../../assets/css/config';
 .list-container {
     padding: 5px 10px;
-
+    overflow-y: auto;
+    overflow-x: hidden;
     .row-wrap {
         width: 100%;
         border-bottom: 1px solid $border-color;

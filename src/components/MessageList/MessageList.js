@@ -52,8 +52,9 @@ export default class MessageList extends Component {
         return array;
     }
     render() {
+        const height=window.innerHeight-40;
         return (
-            <div className="list-container">
+            <div className="list-container" style={{ maxHeight: height }}>
                 {this.renderList()}
             </div>
         )

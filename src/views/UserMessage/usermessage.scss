@@ -1,6 +1,6 @@
 ﻿.message-container {
     .banner {
-        position: fixed;
+        position: absolute;
         left: 0;
         top:0;
         width: 100%;
@@ -11,9 +11,12 @@
         .title {
             margin-right: 50%;
         }
+        i{
+            cursor: pointer;
+        }
     }
 
     .datalist-container {
-        margin-top: 41px;
+        margin-top: 40px;
     }
 }

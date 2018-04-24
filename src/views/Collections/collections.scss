@@ -1,6 +1,6 @@
 ﻿.collection-container {
     .banner {
-        position: fixed;
+        position: absolute;
         left: 0;
         width: 100%;
         background: #f7f7f7;
@@ -13,6 +13,6 @@
     }
 
     .datalist-container {
-        margin-top: 41px;
+        margin-top: 40px;
     }
 }
