@@ -17,7 +17,9 @@ export default class ReplyList extends Component {
         this.setState({
             data: nextProps.data
         })
-        //console.log("nextProps:", nextProps);
+    }
+    shouldComponentUpdate(nextprops,nextstate){
+          return nextprops.NeedRender;
     }
     renderOperationArea(d) {
         let replyAuthor = d.author.loginname;

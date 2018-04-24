@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { Input,Button} from 'antd';
 import './postbox.scss'
 
@@ -11,11 +12,13 @@ export default class PostBox extends Component {
         }
     }
     componentWillReceiveProps(nextprops) {
-        if (nextprops.IsShow) {
-            this.setState({
-                atAuthor: nextprops.atAuthor
-            })
-        }
+       if (nextprops.IsShow) {
+            let author= nextprops.atAuthor===null?null:"@"+ nextprops.atAuthor+" ";
+            ReactDOM.findDOMNode(this.refs.replyContent).value=author;
+       }
+    }
+    componentWillUnmount(){
+        ReactDOM.findDOMNode(this.refs.replyContent).value=null;
     }
     handleChange(key, val) {
         this.setState({
@@ -35,7 +38,7 @@ export default class PostBox extends Component {
             </div>;
         } else {
             return <div className={contentClass}>
-                <TextArea rows={9} placeholder="请输入内容" onChange={v => this.handleChange('content', v)} defaultValue={this.state.atAuthor == null?null: `@${this.state.atAuthor }`} />
+                <TextArea rows={9} placeholder="请输入内容" ref="replyContent" onChange={v => this.handleChange('content', v)}/>
                 <div>
                     <Button type="primary" onClick={() => this.props.onNewPost(this.state)}>提交</Button>
                     <Button type="primary" onClick={this.props.onCloseModel}>取消</Button>

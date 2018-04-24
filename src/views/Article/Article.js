@@ -26,7 +26,8 @@ export default class Article extends Component {
             topicId: null,
             isShowDialog: false,
             atAuthor: null,
-            showLoading: true
+            showLoading: true,
+            isNeedToRenderReply:true
         }
     }
     componentDidMount() {
@@ -64,6 +65,7 @@ export default class Article extends Component {
         }).then(res => {
             if (res.success) {
                 this.setState({
+                    ...this.state,
                     is_collect: !this.state.is_collect
                 })
                 }
@@ -74,13 +76,17 @@ export default class Article extends Component {
     showReplyDialog(replyItem) {
         G_TopicId = replyItem===null?null: replyItem.id;
         this.setState({
+             ...this.state,
             isShowDialog: true,
-            atAuthor: G_TopicId == null ? null : replyItem.author.loginname
+            atAuthor: G_TopicId == null ? null : replyItem.author.loginname,
+            isNeedToRenderReply:false
         })
+        //console.log("this.state:",this.state);
     }
     closeModel() {
         this.setState({
-            isShowDialog: false
+            isShowDialog: false,
+            isNeedToRenderReply:false
         })
     }
     newReply(Reply) {
@@ -95,7 +101,8 @@ export default class Article extends Component {
                     let newReply = data.data.replies.filter(item => { return item.id === res.reply_id })[0];
                     this.setState({
                         replies: [...this.state.replies,newReply],
-                        isShowDialog: false
+                        isShowDialog: false,
+                        isNeedToRenderReply:true
                     })
                 })
         }).catch(err => {
@@ -122,7 +129,8 @@ export default class Article extends Component {
                                 //this.state.replies[index].ups = [...filertedUps];
                                 this.state.replies[index].ups.pop();
                                 this.setState({
-                                    replies: this.state.replies
+                                    replies: this.state.replies,
+                                    isNeedToRenderReply:true
                                 })
                             }
                         }
@@ -134,15 +142,14 @@ export default class Article extends Component {
     }
     render() {
         const { avatar_url, loginname, create_at, visit_count, title, content, reply_count, last_reply_at, replies, is_collect, showLoading } = this.state;
+        const height = window.innerHeight - 40;
         const collect_Icon = is_collect === true ?
             <Icon type="star" onClick={this.collectTopic.bind(this, false)}></Icon>
             :
             <Icon type="star-o" onClick={this.collectTopic.bind(this, true)}></Icon>;
         return (
-            showLoading ?
-                <Spin style={{ marginTop: "80%", marginLeft: "50%" }} type="loading" spin="true"/>
-                :
-                <div className="article">
+           
+                <div className="article" style={{ maxHeight: height }}>
                     <div className="article-b">
                         <Icon type="arrow-left" className="btn-left" onClick={this.handleGoBack.bind(this)} />
                         <h4 className="title">帖子详情</h4>
@@ -173,6 +180,7 @@ export default class Article extends Component {
                         <ReplyList data={replies}
                             onShowReplyDialog={this.showReplyDialog.bind(this)}
                             onLikeReply={this.likeReply.bind(this)}
+                            NeedRender={this.state.isNeedToRenderReply}
                         />
                     </div>
                     <PostBox
