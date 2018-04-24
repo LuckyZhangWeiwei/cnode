@@ -151,7 +151,6 @@ export default class Article extends Component {
         if(showLoading){
             return  <Spin style={{ marginTop: "80%", marginLeft: "50%" }} type="loading" spin="true"/>;
         }else{
-            console.log("replies:",isNeedToRenderReply);
            return   <div className="article" >
            <div className="article-b">
                <Icon type="arrow-left" className="btn-left" onClick={this.handleGoBack.bind(this)} />
@@ -195,12 +194,15 @@ export default class Article extends Component {
                atAuthor={this.state.atAuthor}
                Type="Reply" />
            </div>
+         
 </div>;
         }
   }
     render() {
-      
-        return (<div>{this.renderArticle()}</div>);
+        return (
+            this.renderArticle()
+        )
+       
     }
 
 }

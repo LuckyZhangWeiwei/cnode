@@ -32,6 +32,7 @@ export default class ReplyList extends Component {
     renderList() {
         const { data } = this.state;
         const listDOM = data.map((d, i) => (
+            d.author &&
             <div key={`${i}`} className="row-wrap">
                 <Row className="list-a">
                     <Col span={4} className="list-left">
