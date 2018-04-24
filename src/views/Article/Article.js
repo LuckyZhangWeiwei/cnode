@@ -37,6 +37,7 @@ export default class Article extends Component {
             const { author: { avatar_url, loginname }, create_at, visit_count, title, content, reply_count, last_reply_at, replies, is_collect, author_id } = data.data;
             G_Author_Id = author_id;
             this.setState({
+                ...this.state,
                 avatar_url,
                 loginname,
                 create_at,
@@ -48,7 +49,7 @@ export default class Article extends Component {
                 replies: [...replies],
                 is_collect,
                 topicId: id,
-                showLoading: false
+                showLoading:false
             })
         })
     }
@@ -81,7 +82,6 @@ export default class Article extends Component {
             atAuthor: G_TopicId == null ? null : replyItem.author.loginname,
             isNeedToRenderReply:false
         })
-        //console.log("this.state:",this.state);
     }
     closeModel() {
         this.setState({
@@ -140,57 +140,67 @@ export default class Article extends Component {
                 alert(err);
             })
     }
-    render() {
-        const { avatar_url, loginname, create_at, visit_count, title, content, reply_count, last_reply_at, replies, is_collect, showLoading } = this.state;
+    renderArticle(){
+        const { avatar_url, loginname, create_at, visit_count, title, content, reply_count, last_reply_at, replies, is_collect, showLoading,isNeedToRenderReply } = this.state;
         const height = window.innerHeight - 40;
         const collect_Icon = is_collect === true ?
             <Icon type="star" onClick={this.collectTopic.bind(this, false)}></Icon>
             :
             <Icon type="star-o" onClick={this.collectTopic.bind(this, true)}></Icon>;
-        return (
            
-                <div className="article" style={{ maxHeight: height }}>
-                    <div className="article-b">
-                        <Icon type="arrow-left" className="btn-left" onClick={this.handleGoBack.bind(this)} />
-                        <h4 className="title">帖子详情</h4>
-                        <div className="arrow-right">
-                            <Icon type="form" onClick={this.showReplyDialog.bind(this, null)}></Icon>
-                            {collect_Icon}
-                        </div>
-                    </div>
-                    <div className="top">
-                        <Row>
-                            <Col span={4}>
-                                <img src={avatar_url} />
-                            </Col>
-                            <Col span={20}>
-                                <p className="user-name">{loginname}</p>
-                                <p className="info">at {getDurTime(create_at)},{visit_count} 次点击</p>
-                            </Col>
-                        </Row>
-                    </div>
-                    <div className="content">
-                        <div className="title">
-                            {title}
-                        </div>
-                        <div dangerouslySetInnerHTML={{ __html: `${content}` }} className="article-text"></div>
-                        <p className="reply-count">{reply_count} 回复 | 直到 {last_reply_at}</p>
-                    </div>
-                    <div className="reply">
-                        <ReplyList data={replies}
-                            onShowReplyDialog={this.showReplyDialog.bind(this)}
-                            onLikeReply={this.likeReply.bind(this)}
-                            NeedRender={this.state.isNeedToRenderReply}
-                        />
-                    </div>
-                    <PostBox
-                        onCloseModel={this.closeModel.bind(this)}
-                        onNewPost={this.newReply.bind(this)}
-                        IsShow={this.state.isShowDialog}
-                        atAuthor={this.state.atAuthor}
-                        Type="Reply" />
-                </div>
-            );
+        if(showLoading){
+            return  <Spin style={{ marginTop: "80%", marginLeft: "50%" }} type="loading" spin="true"/>;
+        }else{
+            console.log("replies:",isNeedToRenderReply);
+           return   <div className="article" >
+           <div className="article-b">
+               <Icon type="arrow-left" className="btn-left" onClick={this.handleGoBack.bind(this)} />
+               <h4 className="title">帖子详情</h4>
+               <div className="arrow-right">
+                   <Icon type="form" onClick={this.showReplyDialog.bind(this, null)}></Icon>
+                   {collect_Icon}
+               </div>
+           </div>
+           <div className="article-content" style={{ maxHeight: height }}>
+           <div className="top">
+               <Row>
+                   <Col span={4}>
+                       <img src={avatar_url} />
+                   </Col>
+                   <Col span={20}>
+                       <p className="user-name">{loginname}</p>
+                       <p className="info">at {getDurTime(create_at)},{visit_count} 次点击</p>
+                   </Col>
+               </Row>
+           </div>
+           <div className="content">
+               <div className="title">
+                   {title}
+               </div>
+               <div dangerouslySetInnerHTML={{ __html: `${content}` }} className="article-text"></div>
+               <p className="reply-count">{reply_count} 回复 | 直到 {last_reply_at}</p>
+           </div>
+           <div className="reply">
+               <ReplyList 
+                   data={replies}
+                   onShowReplyDialog={this.showReplyDialog.bind(this)}
+                   onLikeReply={this.likeReply.bind(this)}
+                   NeedRender={this.state.isNeedToRenderReply}
+               />
+           </div>
+           <PostBox
+               onCloseModel={this.closeModel.bind(this)}
+               onNewPost={this.newReply.bind(this)}
+               IsShow={this.state.isShowDialog}
+               atAuthor={this.state.atAuthor}
+               Type="Reply" />
+           </div>
+</div>;
+        }
+  }
+    render() {
+      
+        return (<div>{this.renderArticle()}</div>);
     }
 
 }

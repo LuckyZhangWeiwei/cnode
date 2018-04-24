@@ -1,7 +1,7 @@
 ﻿@import '../../assets/css/config';
 .article {
     background: #fff;
-    overflow-y: auto;
+    overflow:hidden;
     .article-b {
         width: 100%;
         background: #f7f7f7;
@@ -10,12 +10,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         color: $base-color;
         z-index: 6;
-
         .title {
             margin-top: .5em;
             margin-bottom: .5em;
@@ -30,64 +29,68 @@
         }
 
         .arrow-right {
-            font-size: 20px;
+            font-size: 15px;
             i{
                 padding-right:15px;
             }
         }
     }
-
-    .top {
-        padding: 10px;
-        margin-top: $fixed-top-h;
-
-        img {
-            display: block;
-            width: 40px;
-            height: auto;
-            border-radius: 4px;
+        .article-content{
+            margin-top: 40px;
+            overflow-y: auto;
+           
+        .top {
+            padding: 10px;
+            margin-top: $fixed-top-h;
+    
+            img {
+                display: block;
+                width: 40px;
+                height: auto;
+                border-radius: 4px;
+            }
+    
+            p {
+                margin-bottom: 0;
+            }
+    
+            .user-name {
+                color: $emphase-text-color;
+                font-size: 14px;
+            }
+    
+            .info {
+                color: $emphase-text-color;
+                font-size: 12px;
+            }
         }
-
-        p {
-            margin-bottom: 0;
-        }
-
-        .user-name {
-            color: $emphase-text-color;
+    
+        .content {
             font-size: 14px;
-        }
-
-        .info {
             color: $emphase-text-color;
-            font-size: 12px;
-        }
-    }
-
-    .content {
-        font-size: 14px;
-        color: $emphase-text-color;
-        line-height: 24px;
-        border-bottom: 1px solid $border-color;
-        padding: 0 10px;
-
-        .title {
-            font-size: 22px;
-            font-weight: 500;
-            margin: 0 0 12px 0;
-            color: #000;
-            padding-bottom: 5px;
+            line-height: 24px;
             border-bottom: 1px solid $border-color;
-        }
-
-        .article-text, .reply-count {
             padding: 0 10px;
+    
+            .title {
+                font-size: 22px;
+                font-weight: 500;
+                margin: 0 0 12px 0;
+                color: #000;
+                padding-bottom: 5px;
+                border-bottom: 1px solid $border-color;
+            }
+    
+            .article-text, .reply-count {
+                padding: 0 10px;
+            }
+    
+            img {
+                display: block;
+                width: 100%;
+                height: auto;
+                margin: 10px auto;
+            }
         }
-
-        img {
-            display: block;
-            width: 100%;
-            height: auto;
-            margin: 10px auto;
         }
-    }
-}
+  }

@@ -10,16 +10,16 @@ export default class ReplyList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: props.data
         }
     }
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextprops){
         this.setState({
-            data: nextProps.data
+           data:[...this.state.data,nextprops.data]            
         })
     }
     shouldComponentUpdate(nextprops,nextstate){
-          return nextprops.NeedRender;
+        return nextprops.NeedRender;
     }
     renderOperationArea(d) {
         let replyAuthor = d.author.loginname;
