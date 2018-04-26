@@ -15,7 +15,7 @@ export default class ReplyList extends Component {
     }
     componentWillReceiveProps(nextprops){
         this.setState({
-           data:[...this.state.data,nextprops.data]            
+           data:nextprops.data            
         })
     }
     shouldComponentUpdate(nextprops,nextstate){
