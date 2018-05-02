@@ -45,6 +45,7 @@ export default class TopicList extends Component {
         this.setState = (state, callback) => {
             return;
         }
+        this.contentNode && this.contentNode.removeEventListener('scroll', this.onScrollHandle.bind(this));
     }
     onScrollHandle(event) {
         const clientHeight = event.target.clientHeight;
