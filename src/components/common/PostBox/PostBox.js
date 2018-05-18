@@ -16,7 +16,6 @@ export default class PostBox extends Component {
     componentWillReceiveProps(nextprops) {
        if (nextprops.IsShow) {
         let content= ReactDOM.findDOMNode(this.refs.replyContent);
-        console.log(content);
         if(content){
             let author= nextprops.atAuthor===null?null:"@"+ nextprops.atAuthor+" ";
             ReactDOM.findDOMNode(content).value=author;
