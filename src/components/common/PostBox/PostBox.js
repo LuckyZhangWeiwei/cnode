@@ -2,7 +2,7 @@
 import ReactDOM from 'react-dom';
 import { Input,Button} from 'antd';
 import './postbox.scss'
-import Overlay from './../../Overlay/Overlay';
+import Overlay from './../Overlay/Overlay';
 
 const { TextArea } = Input;
 export default class PostBox extends Component {
