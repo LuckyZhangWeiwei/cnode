@@ -1,0 +1,36 @@
+.overlay{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(43,46,56,.7);
+    z-index: 999;
+}
+.as-in {
+    animation: as-easein .30s forwards;
+}
+
+.as-out {
+    animation: as-easeout .30s forwards;
+}
+
+@keyframes as-easein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes as-easeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

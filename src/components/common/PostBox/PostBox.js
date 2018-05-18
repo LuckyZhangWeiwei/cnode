@@ -2,6 +2,7 @@
 import ReactDOM from 'react-dom';
 import { Input,Button} from 'antd';
 import './postbox.scss'
+import Overlay from './../../Overlay/Overlay';
 
 const { TextArea } = Input;
 export default class PostBox extends Component {
@@ -15,6 +16,7 @@ export default class PostBox extends Component {
     componentWillReceiveProps(nextprops) {
        if (nextprops.IsShow) {
         let content= ReactDOM.findDOMNode(this.refs.replyContent);
+        console.log(content);
         if(content){
             let author= nextprops.atAuthor===null?null:"@"+ nextprops.atAuthor+" ";
             ReactDOM.findDOMNode(content).value=author;
@@ -38,7 +40,7 @@ export default class PostBox extends Component {
         isShow ? "content-box  content-up" : "content-box  content-down";
 
         if (this.props.Type === "Topic") {
-            return <div className={contentClass}>
+            return <div className={contentClass} onClick={(e)=>{e.stopPropagation();}}>
                 <Input placeholder="请输入标题" onChange={v => this.handleChange('title', v)} />
                 <TextArea rows={9} placeholder="请输入内容" onChange={v => this.handleChange('content', v)}/>
                 <div>
@@ -47,7 +49,7 @@ export default class PostBox extends Component {
                 </div>
             </div>;
         } else {
-            return <div className={contentClass}>
+            return <div className={contentClass} onClick={(e)=>{e.stopPropagation();}}>
                 <TextArea rows={9} placeholder="请输入内容" ref="replyContent" onChange={v => this.handleChange('content', v)}/>
                 <div>
                     <Button type="primary" onClick={() => this.props.onNewPost(this.state)}>提交</Button>
@@ -57,12 +59,18 @@ export default class PostBox extends Component {
         }
     }
     render() {
-        let dialogClass = this.props.IsShow ? "dialog  as-in":"as-out" ;
-        let dialog =
-            <div className="container">
-                <div className={dialogClass} onClick={this.props.onCloseModel}></div>
-                {this.renderContent(this.props.IsShow)}
-        </div>
+        //  let dialogClass = this.props.IsShow ? "dialog  as-in":"as-out" ;
+        // let dialog =
+        //     <div className="container">
+        //         <div className={dialogClass} onClick={this.props.onCloseModel}></div>
+        //         {this.renderContent(this.props.IsShow)}
+        // </div>
+        // return dialog;
+
+        const dialog= <Overlay onClose={this.props.onCloseModel} isshow={this.props.IsShow}>
+             {this.renderContent(this.props.IsShow)}
+        </Overlay>;
+       
         return dialog;
     }
 }

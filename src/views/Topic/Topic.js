@@ -25,6 +25,11 @@ export default class Topics extends Component {
                 usertoken: null
             }
         }
+        this.handleRight=this.handleRight.bind(this);
+        this.handleAdd=this.handleAdd.bind(this);
+        this.handleLeft=this.handleLeft.bind(this);
+        this.closeModel=this.closeModel.bind(this);
+        this.newPost=this.newPost.bind(this);
     }
     componentWillMount() {
         const [avatar_url, id, loginname, usertoken] = getCookie('cnodeuser').split('|');
@@ -106,7 +111,7 @@ export default class Topics extends Component {
                     isLeft ? <SideLeft userInfo={this.state.userInfo} /> : null
                 }
                 <div className="content" style={{ marginLeft: toLR }}>
-                    <Banner showLeft={this.handleLeft.bind(this)} showRight={this.handleRight.bind(this)} showAddBtn={this.state.isShowAdd} addBtnOnClick={this.handleAdd.bind(this)}>
+                    <Banner showLeft={this.handleLeft} showRight={this.handleRight} showAddBtn={this.state.isShowAdd} addBtnOnClick={this.handleAdd}>
                     </Banner>
                     <TopicList tab={this.props.match.params.id} refresh={this.state.resfresh} />
                 </div>
@@ -114,8 +119,8 @@ export default class Topics extends Component {
                     isRight ? <SideRight/>:null
                 }
                  <PostBox
-                        onCloseModel={this.closeModel.bind(this)}
-                        onNewPost={this.newPost.bind(this)}
+                        onCloseModel={this.closeModel}
+                        onNewPost={this.newPost}
                         IsShow={this.state.isShowDialog}
                         Type="Topic"
                     /> 

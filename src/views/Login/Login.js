@@ -10,6 +10,9 @@ export default class Login extends Component {
         this.state = {
             user: null
         }
+        this.handleLogin=this.handleLogin.bind(this);
+        this.handleChange=this.handleChange.bind(this);
+        this.loginIn=this.loginIn.bind(this);
     }
     handleChange(e) {
         this.setState({
@@ -50,12 +53,12 @@ export default class Login extends Component {
                     <h1 className="logo-name">Cnode</h1>
                 </div>
                 <div className="login-content">
-                    <Input onChange={this.handleChange.bind(this)} placeholder="请输入 Access Token" />
+                    <Input onChange={this.handleChange} placeholder="请输入 Access Token" />
                     <p>
-                        <Button type="primary" onClick={this.handleLogin.bind(this)}>登录</Button>
+                        <Button type="primary" onClick={this.handleLogin}>登录</Button>
                     </p>
                     <p>
-                        <Button type="danger" onClick={this.loginIn.bind(this)}>跳过</Button>
+                        <Button type="danger" onClick={this.loginIn}>跳过</Button>
                     </p>
                 </div>
                 <p className="foot">cnode 第三方客户端</p>

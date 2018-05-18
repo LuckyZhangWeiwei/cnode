@@ -16,6 +16,8 @@ export default class User extends Component {
             recent_topics: [],
             isTopics: true
         }
+        this.handleToggleTab=this.handleToggleTab.bind(this);
+        this.handleBack=this.handleBack.bind(this);
     }
     componentWillMount() {
         const userId = this.props.match.params.userId;
@@ -45,7 +47,7 @@ export default class User extends Component {
             return (
                 <div className="user">
                     <div className="fix-top">
-                        <span className="go-back" onClick={this.handleBack.bind(this)}>
+                        <span className="go-back" onClick={this.handleBack}>
                             <Icon type="left"/>
                         </span>
                         <div className="user-info">
@@ -56,8 +58,8 @@ export default class User extends Component {
                             </div>
                         </div>
                         <div className="tab-sel">
-                            <span className={isTopics ? 'active' : null} onClick={this.handleToggleTab.bind(this)}>主题</span>
-                            <span className={isTopics ? null : 'active'} onClick={this.handleToggleTab.bind(this)}>回复</span>
+                            <span className={isTopics ? 'active' : null} onClick={this.handleToggleTab}>主题</span>
+                            <span className={isTopics ? null : 'active'} onClick={this.handleToggleTab}>回复</span>
                         </div>
                     </div>
                     <div className="user-detail">

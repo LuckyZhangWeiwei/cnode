@@ -29,6 +29,12 @@ export default class Article extends Component {
             showLoading: true,
             isNeedToRenderReply:true
         }
+        this.handleGoBack=this.handleGoBack.bind(this);
+        this.showReplyDialog=this.showReplyDialog.bind(this);
+        this.likeReply=this.likeReply.bind(this);
+        this.closeModel=this.closeModel.bind(this);
+        this.newReply=this.newReply.bind(this);
+        this.showReplyDialog=this.showReplyDialog.bind(this);
     }
     componentDidMount() {
         const { id } = this.props.match.params;
@@ -144,19 +150,19 @@ export default class Article extends Component {
         const { avatar_url, loginname, create_at, visit_count, title, content, reply_count, last_reply_at, replies, is_collect, showLoading,isNeedToRenderReply } = this.state;
         const height = window.innerHeight - 40;
         const collect_Icon = is_collect === true ?
-            <Icon type="star" onClick={this.collectTopic.bind(this, false)}></Icon>
+            <Icon type="star" onClick={this.collectTopic.bind(this,false)}></Icon>
             :
-            <Icon type="star-o" onClick={this.collectTopic.bind(this, true)}></Icon>;
+            <Icon type="star-o" onClick={this.collectTopic.bind(this,true)}></Icon>;
            
         if(showLoading){
             return  <Spin style={{ marginTop: "80%", marginLeft: "50%" }} type="loading" spin="true"/>;
         }else{
            return   <div className="article" >
            <div className="article-b">
-               <Icon type="arrow-left" className="btn-left" onClick={this.handleGoBack.bind(this)} />
+               <Icon type="arrow-left" className="btn-left" onClick={this.handleGoBack} />
                <h4 className="title">帖子详情</h4>
                <div className="arrow-right">
-                   <Icon type="form" onClick={this.showReplyDialog.bind(this, null)}></Icon>
+                   <Icon type="form" onClick={this.showReplyDialog}></Icon>
                    {collect_Icon}
                </div>
            </div>
@@ -182,14 +188,14 @@ export default class Article extends Component {
            <div className="reply">
                <ReplyList 
                    data={replies}
-                   onShowReplyDialog={this.showReplyDialog.bind(this)}
-                   onLikeReply={this.likeReply.bind(this)}
+                   onShowReplyDialog={this.showReplyDialog}
+                   onLikeReply={this.likeReply}
                    NeedRender={this.state.isNeedToRenderReply}
                />
            </div>
            <PostBox
-               onCloseModel={this.closeModel.bind(this)}
-               onNewPost={this.newReply.bind(this)}
+               onCloseModel={this.closeModel}
+               onNewPost={this.newReply}
                IsShow={this.state.isShowDialog}
                atAuthor={this.state.atAuthor}
                Type="Reply" />

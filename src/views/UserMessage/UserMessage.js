@@ -13,6 +13,7 @@ export default class UserMessage extends Component {
             hasnot_read_messages: [],
             all_list:[]
         }
+        this.seeReply=this.seeReply.bind(this);
     }
     componentWillMount() {
         const [avatar_url, id, loginname, usertoken] = getCookie('cnodeuser').split('|');
@@ -56,7 +57,7 @@ export default class UserMessage extends Component {
                 </div>
                 <section className="datalist-container">
                     <MessageList data={this.state.all_list}
-                        onSeeReply={this.seeReply.bind(this)}
+                        onSeeReply={this.seeReply}
                     />
                 </section>
             </div>

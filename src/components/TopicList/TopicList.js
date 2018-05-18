@@ -17,6 +17,7 @@ export default class TopicList extends Component {
                 tab: this.props.tab
             }
         }
+        this.onScrollHandle=this.onScrollHandle.bind(this);
     }
     componentWillReceiveProps(nextProps) {
         if (
@@ -39,13 +40,13 @@ export default class TopicList extends Component {
     }
     componentDidMount() {
         this.getData();
-        this.contentNode && this.contentNode.addEventListener('scroll', this.onScrollHandle.bind(this));
+        this.contentNode && this.contentNode.addEventListener('scroll', this.onScrollHandle);
     }
     componentWillUnmount = () => {
         this.setState = (state, callback) => {
             return;
         }
-        this.contentNode && this.contentNode.removeEventListener('scroll', this.onScrollHandle.bind(this));
+        this.contentNode && this.contentNode.removeEventListener('scroll', this.onScrollHandle);
     }
     onScrollHandle(event) {
         const clientHeight = event.target.clientHeight;
