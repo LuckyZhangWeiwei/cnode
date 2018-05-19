@@ -5,6 +5,7 @@
     -webkit-overflow-scrolling : touch;
     .row-wrap {
         .list {
+            
             width: 100%;
             border-bottom: 1px solid $border-color;
             display: flex;
@@ -42,12 +43,15 @@
                 }
             }
         }
-
-        &:last-child { //.row-wrap:last-child .list
-            .list {
-                border-bottom: none;
-                margin-bottom: 60px;
-            }
+       .list a{
+            display: block;
         }
+    } 
+    .row-wrap:last-child .list{
+        // .list {
+            border-bottom: none;
+            margin-bottom: 160px;
+        // }
     }
+   
 }
