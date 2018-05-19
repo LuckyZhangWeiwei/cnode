@@ -3,6 +3,7 @@
     padding: 5px 10px;
     overflow-y: auto;
     overflow-x: hidden;
+    -webkit-overflow-scrolling : touch;
     .row-wrap {
         width: 100%;
         border-bottom: 1px solid $border-color;

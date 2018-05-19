@@ -1,6 +1,8 @@
 ﻿@import '../../assets/css/config';
 
 .list-container {
+    overflow-y:auto;
+    -webkit-overflow-scrolling : touch;
     .row-wrap {
         .list {
             width: 100%;
@@ -9,6 +11,7 @@
             justify-content: flex-start;
             align-items: center;
             background: #fff;
+            
 
             .list-left {
                 width: 20%;
@@ -43,6 +46,7 @@
         &:last-child { //.row-wrap:last-child .list
             .list {
                 border-bottom: none;
+                margin-bottom: 60px;
             }
         }
     }

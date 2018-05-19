@@ -38,7 +38,7 @@
         .article-content{
             margin-top: 40px;
             overflow-y: auto;
-           
+            -webkit-overflow-scrolling : touch;
         .top {
             padding: 10px;
             margin-top: $fixed-top-h;
