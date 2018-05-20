@@ -23,7 +23,10 @@ export default class PostBox extends Component {
         let content= ReactDOM.findDOMNode(this.refs.replyContent);
         if(content){
             let author= nextprops.atAuthor===null?null:"@"+ nextprops.atAuthor+" ";
-            ReactDOM.findDOMNode(content).value=author;
+           // ReactDOM.findDOMNode(content).value=author;
+           this.setState({
+               content:author
+           })
         }
         this.setState({
             isFirstTime:false
