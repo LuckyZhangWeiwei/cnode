@@ -12,6 +12,11 @@ export default class PostBox extends Component {
             atAuthor: null,
             isFirstTime:true
         }
+        this.cancel=this.cancel.bind(this);
+    }
+    cancel(){
+        this.setState({title:null,content:null});
+        this.props.onCloseModel();
     }
     componentWillReceiveProps(nextprops) {
        if (nextprops.IsShow) {
@@ -40,19 +45,19 @@ export default class PostBox extends Component {
 
         if (this.props.Type === "Topic") {
             return <div className={contentClass} onClick={(e)=>{e.stopPropagation();}}>
-                <Input placeholder="请输入标题" onChange={v => this.handleChange('title', v)} />
-                <TextArea rows={9} placeholder="请输入内容" onChange={v => this.handleChange('content', v)}/>
+                <Input placeholder="请输入标题" value={this.state.title} onChange={v => this.handleChange('title', v)} />
+                <TextArea rows={4} placeholder="请输入内容" value={this.state.content} onChange={v => this.handleChange('content', v)}/>
                 <div>
                     <Button type="primary" onClick={() => this.props.onNewPost(this.state)}>提交</Button>
-                    <Button type="primary" onClick={this.props.onCloseModel}>取消</Button>
+                    <Button type="primary" onClick={this.cancel}>取消</Button>
                 </div>
             </div>;
         } else {
             return <div className={contentClass} onClick={(e)=>{e.stopPropagation();}}>
-                <TextArea rows={9} placeholder="请输入内容" ref="replyContent" onChange={v => this.handleChange('content', v)}/>
+                <TextArea rows={5} value={this.state.content} placeholder="请输入内容" ref="replyContent" onChange={v => this.handleChange('content', v)}/>
                 <div>
                     <Button type="primary" onClick={() => this.props.onNewPost(this.state)}>提交</Button>
-                    <Button type="primary" onClick={this.props.onCloseModel}>取消</Button>
+                    <Button type="primary" onClick={this.cancel}>取消</Button>
                 </div>
             </div>;
         }
@@ -66,7 +71,7 @@ export default class PostBox extends Component {
         // </div>
         // return dialog;
 
-        const dialog= <Overlay onClose={this.props.onCloseModel} isshow={this.props.IsShow}>
+        const dialog= <Overlay onClose={this.cancel} isshow={this.props.IsShow}>
              {this.renderContent(this.props.IsShow)}
         </Overlay>;
        
