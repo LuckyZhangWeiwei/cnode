@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 import { SelectionBoxProps, SelectionBoxState } from './interface';
 export default class SelectionBox extends React.Component<SelectionBoxProps, SelectionBoxState> {

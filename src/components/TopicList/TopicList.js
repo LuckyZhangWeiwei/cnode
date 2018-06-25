@@ -53,7 +53,7 @@ export default class TopicList extends Component {
         const scrollHeight = event.target.scrollHeight;
         const scrollTop = event.target.scrollTop;
         const isBottom = (clientHeight + scrollTop === scrollHeight);
-        if (isBottom) {
+        if (isBottom && !this.state.isAddLoad) {
             this.setState({
                 isAddLoad: true,
                 params: {

@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import * as React from 'react';
 import { UploadProps } from './interface';
 export declare type DraggerProps = UploadProps & {
